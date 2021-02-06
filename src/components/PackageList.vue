@@ -17,7 +17,7 @@
         @click:row="getInfo"
         class="elevation-1"
     ></v-data-table>
-  <PackageCard v-model="modalIsVisible" />
+  <PackageCard v-model="modalIsVisible" :current="currentPackage"/>
   </div>
 </template>
 
@@ -31,6 +31,7 @@ name: "PackageList",
   data () {
     return {
       modalIsVisible: false,
+      currentPackage: {},
       searchString: 'bootstrap',
       totalPackages: 0,
       packages: [],
@@ -57,11 +58,11 @@ name: "PackageList",
    async getInfo(row){
      try{
        this.modalIsVisible = true
-       const currentPackage = {
+       this.currentPackage = {
          name: row.name,
          version: row.version
        }
-       await this.$store.dispatch('packageFilesModule/getFiles', currentPackage)
+       await this.$store.dispatch('packageFilesModule/getFiles', this.currentPackage)
      } catch (error) {
        console.log(error)
      }

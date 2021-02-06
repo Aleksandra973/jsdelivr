@@ -12,5 +12,14 @@ export default {
             }))
 
         }
-    }
+    },
+    currentPage: (state) => (currentName) => {
+            let currentPackage = state.searchPackage.list.find(x => x.package.name == currentName)
+            return {
+                maintainers: currentPackage?.package?.maintainers,
+                keywords: currentPackage?.package?.keywords,
+                links: currentPackage?.package?.links
+                //{maintainers, keywords, links} = currentPackage?.package
+            }
+        }
 }
