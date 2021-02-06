@@ -8,7 +8,7 @@ export default {
                 version: x.package?.version,
                 description: x.package?.description,
                 author: x.package?.author?.name,
-                keywords: x.package?.keywords?.slice(0,5).join()
+                keywords: x.package?.keywords?.slice(0,3).join(', ')
             }))
 
         }

@@ -10,7 +10,7 @@
 
 
     <v-footer>
-
+      Alexandra - https://github.com/Aleksandra973/jsdelivr
     </v-footer>
   </v-app>
 </template>
@@ -28,3 +28,20 @@ export default {
 
 };
 </script>
+
+<style scoped lang="scss">
+
+  .v-main {
+    padding-bottom: 2.5em !important;
+  }
+
+  .v-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    margin: 0 auto;
+    display: table;
+    text-align: center;
+  }
+</style>
