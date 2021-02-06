@@ -1,0 +1,94 @@
+<template>
+  <div>
+    <v-text-field
+        outlined
+        prependInnerIcon="mdi-magnify"
+        class="col-10"
+        placeholder="Search package"
+        @keyup.enter="submit"
+        v-model="searchString"
+    />
+    <v-data-table
+        :headers="headers"
+        :items="packages"
+        :options.sync="options"
+        :server-items-length="totalPackages"
+        :loading="loading"
+        @click:row="getInfo"
+        class="elevation-1"
+    ></v-data-table>
+  <PackageCard v-model="modalIsVisible" />
+  </div>
+</template>
+
+<script>
+import PackageCard from './PackageCard'
+
+
+export default {
+name: "PackageList",
+  components: {PackageCard},
+  data () {
+    return {
+      modalIsVisible: false,
+      searchString: 'bootstrap',
+      totalPackages: 0,
+      packages: [],
+      loading: false,
+      options: {},
+      headers: [
+        {
+          text: 'Package name',
+          align: 'start',
+          sortable: false,
+          value: 'name',
+        },
+        { text: 'Version', value: 'version',sortable: false, },
+        { text: 'Description', value: 'description',sortable: false, },
+        { text: 'Author', value: 'author',sortable: false, },
+        { text: 'Keywords', value: 'keywords',sortable: false, }
+      ],
+    }
+  },
+  comments: {
+    PackageCard
+  },
+  methods: {
+    getInfo(e){
+      console.log(e)
+      this.modalIsVisible = true
+    },
+    async submit() {
+      try {
+        const { page, itemsPerPage } = this.options
+        const searchModel = {
+          searchString: this.searchString,
+          page: page,
+          itemsPerPage: itemsPerPage
+        }
+        this.loading = true
+        await this.$store.dispatch('packageListModule/searchPackage', searchModel)
+        const response = this.$store.getters['packageListModule/searchPackage']
+        this.totalPackages = response.total
+        this.packages = response.list
+        console.log(this.packages)
+      } finally {
+        this.loading = false
+      }
+
+    },
+  },
+  watch: {
+    options: {
+     async handler () {
+        await this.submit()
+      },
+      deep: true,
+    },
+  },
+}
+</script>
+
+<style scoped>
+
+</style>
