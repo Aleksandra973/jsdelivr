@@ -3,11 +3,11 @@ import mutations from './mutations'
 import getters from './getters'
 import actions from './actions'
 
-const packageInfoModule = {
+const packageFilesModule = {
     namespaced: true,
     state,
     mutations,
     getters,
     actions
 }
- export default packageInfoModule
+ export default packageFilesModule

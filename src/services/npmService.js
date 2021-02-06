@@ -12,7 +12,6 @@ export class npmService{
                     size: itemsPerPage
                 }
             })
-            console.log(response)
             let packageList = {
                 list: response.data.objects,
                 total: response.data.total

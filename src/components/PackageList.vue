@@ -54,9 +54,19 @@ name: "PackageList",
     PackageCard
   },
   methods: {
-    getInfo(e){
-      console.log(e)
-      this.modalIsVisible = true
+   async getInfo(row){
+     try{
+       this.modalIsVisible = true
+       const currentPackage = {
+         name: row.name,
+         version: row.version
+       }
+       await this.$store.dispatch('packageFilesModule/getFiles', currentPackage)
+     } catch (error) {
+       console.log(error)
+     }
+
+
     },
     async submit() {
       try {
