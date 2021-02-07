@@ -12,41 +12,41 @@
     </v-card-title>
     <v-card-text>
       <v-container>
-        <v-row>
+        <v-row no-gutters>
           <v-col cols="4">
-            <v-subheader class="card-title-title">Keywords:</v-subheader>
+            <div class="card-title-title">Keywords:</div>
           </v-col>
           <v-col cols="8">
-            <v-subheader>{{getKeywordString(currentPackage)}}</v-subheader>
+            <div>{{getKeywordString(currentPackage)}}</div>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row no-gutters>
           <v-col cols="4">
-            <v-subheader class="card-title-title">Maintainers:</v-subheader>
+            <div class="card-title-title">Maintainers:</div>
           </v-col>
           <v-col cols="8">
-            <v-subheader>{{getMaintainersStrings(currentPackage)}}</v-subheader>
+            <div>{{getMaintainersStrings(currentPackage)}}</div>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row no-gutters>
           <v-col cols="4">
-            <v-subheader class="card-title-title">Home page:</v-subheader>
+            <div class="card-title-title">Home page:</div>
           </v-col>
           <v-col cols="8">
-            <v-subheader v-if="currentPackage.links">{{currentPackage.links.homepage}}</v-subheader>
+            <div v-if="currentPackage.links">{{currentPackage.links.homepage}}</div>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row no-gutters>
           <v-col cols="4">
-            <v-subheader class="card-title-title">Repository:</v-subheader>
+            <div class="card-title-title">Repository:</div>
           </v-col>
           <v-col cols="8">
-            <v-subheader v-if="currentPackage.links">{{currentPackage.links.repository}}</v-subheader>
+            <div v-if="currentPackage.links">{{currentPackage.links.repository}}</div>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row no-gutters>
           <v-col cols="4">
-            <v-subheader class="card-title-title">Files:</v-subheader>
+            <div class="card-title-title">Files:</div>
           </v-col>
           <v-col cols="8">
             <PartialCollapseBlock>

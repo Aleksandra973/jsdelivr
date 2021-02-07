@@ -19,7 +19,6 @@ export default {
                 maintainers: currentPackage?.package?.maintainers,
                 keywords: currentPackage?.package?.keywords,
                 links: currentPackage?.package?.links
-                //{maintainers, keywords, links} = currentPackage?.package
             }
         }
 }
