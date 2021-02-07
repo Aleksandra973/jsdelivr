@@ -63,8 +63,6 @@ name: "PackageList",
      } catch (error) {
        console.log(error)
      }
-
-
     },
     async submit() {
       try {
@@ -79,7 +77,12 @@ name: "PackageList",
         const response = this.$store.getters['packageListModule/searchPackage']
         this.totalPackages = response.total
         this.packages = response.list
-      } finally {
+      }
+      catch (e){
+        console.log(e)
+        await this.$store.dispatch('alertsModule/sendMessage', "Error when receive package search")
+      }
+      finally {
         this.loading = false
       }
 
