@@ -2,10 +2,12 @@ import axios from "axios";
 
 export class jsDelivrService {
 
+    static url = 'https://data.jsdelivr.com'
+
     static async getFiles(currentPackage) {
 
         let {name, version} = currentPackage
-        let response = await axios.get(`https://data.jsdelivr.com/v1/package/npm/${name}@${version}`)
+        let response = await axios.get(`${jsDelivrService.url}/v1/package/npm/${name}@${version}`)
         return response.data
     };
 
