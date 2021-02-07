@@ -2,7 +2,8 @@
   <v-dialog
   v-model="show"
   persistent
-  max-width="600px"
+  scrollable
+
   >
 
   <v-card>
@@ -11,9 +12,42 @@
     </v-card-title>
     <v-card-text>
       <v-container>
-        <div>
-          {{getKeywordString(currentPackage)}}
-        </div>
+        <v-row>
+          <v-col cols="4">
+            <v-subheader class="card-title-title">Keywords:</v-subheader>
+          </v-col>
+          <v-col cols="8">
+            <v-subheader>{{getKeywordString(currentPackage)}}</v-subheader>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="4">
+            <v-subheader class="card-title-title">Maintainers:</v-subheader>
+          </v-col>
+          <v-col cols="8">
+            <v-subheader>{{getMaintainersStrings(currentPackage)}}</v-subheader>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="4">
+            <v-subheader class="card-title-title">Home page:</v-subheader>
+          </v-col>
+          <v-col cols="8">
+            <v-subheader>{{currentPackage.links.homepage}}</v-subheader>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="4">
+            <v-subheader class="card-title-title">Repository:</v-subheader>
+          </v-col>
+          <v-col cols="8">
+            <v-subheader>{{currentPackage.links.repository}}</v-subheader>
+          </v-col>
+        </v-row>
+
+
+
+
         <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-header>
@@ -49,12 +83,22 @@ export default {
   },
   methods: {
     getKeywordString(currentPackage ) {
+      console.log(currentPackage)
       if(currentPackage?.keywords === undefined || currentPackage?.keywords === null)
       {
         return null;
       }
 
       return currentPackage.keywords.join(', ')
+    },
+    getMaintainersStrings(currentPackage ) {
+      console.log(currentPackage)
+      if(currentPackage?.maintainers === undefined || currentPackage?.maintainers === null)
+      {
+        return null;
+      }
+
+      return currentPackage.maintainers.map(x=>x.email).join(', ')
     }
   },
   computed: {
@@ -76,6 +120,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  .card-title-title {
+    font-weight: bold;
+  }
 
+  .row{
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
 </style>
