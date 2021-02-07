@@ -3,7 +3,7 @@
   v-model="show"
   persistent
   scrollable
-
+  max-width="800px"
   >
 
   <v-card>
@@ -33,7 +33,7 @@
             <v-subheader class="card-title-title">Home page:</v-subheader>
           </v-col>
           <v-col cols="8">
-            <v-subheader>{{currentPackage.links.homepage}}</v-subheader>
+            <v-subheader v-if="currentPackage.links">{{currentPackage.links.homepage}}</v-subheader>
           </v-col>
         </v-row>
         <v-row>
@@ -41,23 +41,21 @@
             <v-subheader class="card-title-title">Repository:</v-subheader>
           </v-col>
           <v-col cols="8">
-            <v-subheader>{{currentPackage.links.repository}}</v-subheader>
+            <v-subheader v-if="currentPackage.links">{{currentPackage.links.repository}}</v-subheader>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="4">
+            <v-subheader class="card-title-title">Files:</v-subheader>
+          </v-col>
+          <v-col cols="8">
+            <PartialCollapseBlock>
+              <div v-for="file in packageFiles" class="file-item">{{ file }}</div>
+            </PartialCollapseBlock>
           </v-col>
         </v-row>
 
 
-
-
-        <v-expansion-panels>
-          <v-expansion-panel>
-            <v-expansion-panel-header>
-              List files
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <div v-for="file in packageFiles">{{ file }}</div>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>
       </v-container>
     </v-card-text>
     <v-card-actions>
@@ -75,15 +73,22 @@
 </template>
 
 <script>
+import PartialCollapseBlock from './PartialCollapseBlock'
+
 export default {
   name: "PackageCard",
+  components: { PartialCollapseBlock },
   props: {
     value: Boolean,
     current: Object
   },
+  data(){
+    return {
+      isFullMode: false
+    }
+  },
   methods: {
     getKeywordString(currentPackage ) {
-      console.log(currentPackage)
       if(currentPackage?.keywords === undefined || currentPackage?.keywords === null)
       {
         return null;
@@ -92,14 +97,17 @@ export default {
       return currentPackage.keywords.join(', ')
     },
     getMaintainersStrings(currentPackage ) {
-      console.log(currentPackage)
       if(currentPackage?.maintainers === undefined || currentPackage?.maintainers === null)
       {
         return null;
       }
 
       return currentPackage.maintainers.map(x=>x.email).join(', ')
+    },
+    getPackageFiles(){
+
     }
+
   },
   computed: {
     currentPackage() {
@@ -107,6 +115,12 @@ export default {
     },
     packageFiles() {
       return this.$store.getters['packageFilesModule/packageFiles']
+    },
+    packageFilesPreview() {
+      return this.$store.getters['packageFilesModule/packageFiles'].slice(0, 3)
+    },
+    packageFilesWithoutPreview() {
+      return this.$store.getters['packageFilesModule/packageFiles'].slice(3)
     },
     show: {
       get () {
@@ -129,4 +143,13 @@ export default {
     margin-bottom: 5px;
     margin-top: 5px;
   }
+
+  .file-item {
+    padding-left: 12px;
+  }
+
+  .toggle-button {
+    margin-top: 5px;
+  }
+
 </style>

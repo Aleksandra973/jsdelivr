@@ -32,7 +32,7 @@ name: "PackageList",
     return {
       modalIsVisible: false,
       currentPackage: {},
-      searchString: 'bootstrap',
+      searchString: '',
       totalPackages: 0,
       packages: [],
       loading: false,
@@ -50,9 +50,6 @@ name: "PackageList",
         { text: 'Keywords', value: 'keywords',sortable: false, }
       ],
     }
-  },
-  comments: {
-    PackageCard
   },
   methods: {
    async getInfo(row){
@@ -82,7 +79,6 @@ name: "PackageList",
         const response = this.$store.getters['packageListModule/searchPackage']
         this.totalPackages = response.total
         this.packages = response.list
-        console.log(this.packages)
       } finally {
         this.loading = false
       }
