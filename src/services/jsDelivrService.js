@@ -1,15 +1,12 @@
 import axios from "axios";
 
-export class jsDelivrService{
+export class jsDelivrService {
 
-    static async getFiles (currentPackage) {
-        try{
-            let {name, version} = currentPackage
-            let response = await axios.get(`https://data.jsdelivr.com/v1/package/npm/${name}@${version}`)
-            return response.data
-        } catch (error) {
-            console.log(error)
-        }
+    static async getFiles(currentPackage) {
+
+        let {name, version} = currentPackage
+        let response = await axios.get(`https://data.jsdelivr.com/v1/package/npm/${name}@${version}`)
+        return response.data
     };
 
     static pathVisitor(parentPath, node, pathList) {
@@ -17,7 +14,7 @@ export class jsDelivrService{
             pathList.push(`${parentPath}/${node.name}`.substring(10))
             return;
         }
-        for(let child of node.files) {
+        for (let child of node.files) {
             this.pathVisitor(`${parentPath}/${node.name}`, child, pathList)
         }
     }

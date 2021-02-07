@@ -62,6 +62,7 @@ name: "PackageList",
        await this.$store.dispatch('packageFilesModule/getFiles', this.currentPackage)
      } catch (error) {
        console.log(error)
+       await this.$store.dispatch('alertsModule/sendMessage', "Error when receive package info")
      }
     },
     async submit() {
@@ -80,7 +81,7 @@ name: "PackageList",
       }
       catch (e){
         console.log(e)
-        await this.$store.dispatch('alertsModule/sendMessage', "Error when receive package search")
+        await this.$store.dispatch('alertsModule/sendMessage', "Error when execute package search")
       }
       finally {
         this.loading = false
