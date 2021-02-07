@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div  v-bind:class="{ 'collapsed-container': !isFullMode}">
+    <div  :class="{ 'collapsed-container': !isExpanded}">
       <slot></slot>
-      <v-btn v-if="isFullMode" class="toggle-button button-align" small @click="isFullMode = !isFullMode">Show {{`${isFullMode ? 'less': 'more'}`}}</v-btn>
     </div>
-
-    <v-btn v-if="!isFullMode" class="toggle-button button-align" small @click="isFullMode = !isFullMode">Show {{`${isFullMode ? 'less': 'more'}`}}</v-btn>
+    <v-btn class="toggle-button button-align" small @click="isExpanded = !isExpanded">Show
+      {{ isExpanded ? 'less' : 'more' }}</v-btn>
   </div>
 
 </template>
@@ -14,11 +13,21 @@
 export default {
 name: "PartialCollapseBlock",
   props: {
-    defaultHeight: null
+    value: Boolean
   },
   data(){
     return {
-      isFullMode: false
+
+    }
+  },
+  computed: {
+    isExpanded: {
+      get () {
+        return this.value
+      },
+      set (value) {
+        this.$emit('input', value)
+      }
     }
   }
 }

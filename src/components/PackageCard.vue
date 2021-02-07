@@ -49,8 +49,8 @@
             <div class="card-title-title">Files:</div>
           </v-col>
           <v-col cols="8">
-            <PartialCollapseBlock>
-              <div v-for="file in packageFiles" class="file-item">{{ file }}</div>
+            <PartialCollapseBlock v-model="isExpanded">
+              <div v-for="file in packageFiles">{{ file }}</div>
             </PartialCollapseBlock>
           </v-col>
         </v-row>
@@ -84,7 +84,8 @@ export default {
   },
   data(){
     return {
-      isFullMode: false
+      isFullMode: false,
+      isExpanded: false
     }
   },
   methods: {
@@ -116,17 +117,12 @@ export default {
     packageFiles() {
       return this.$store.getters['packageFilesModule/packageFiles']
     },
-    packageFilesPreview() {
-      return this.$store.getters['packageFilesModule/packageFiles'].slice(0, 3)
-    },
-    packageFilesWithoutPreview() {
-      return this.$store.getters['packageFilesModule/packageFiles'].slice(3)
-    },
     show: {
       get () {
         return this.value
       },
       set (value) {
+        this.isExpanded = false
         this.$emit('input', value)
       }
     }
@@ -142,10 +138,6 @@ export default {
   .row{
     margin-bottom: 5px;
     margin-top: 5px;
-  }
-
-  .file-item {
-    padding-left: 12px;
   }
 
   .toggle-button {

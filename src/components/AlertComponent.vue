@@ -13,14 +13,8 @@ export default {
   name: "AlertComponent",
   data() {
     return {
-      text: "123",
+      text: '',
       snackbar: false
-    }
-  },
-  methods: {
-    test(){
-      this.$store.dispatch('alertsModule/sendMessage', "aaaaaaa")
-      this.snackbar = true
     }
   },
   created () {
