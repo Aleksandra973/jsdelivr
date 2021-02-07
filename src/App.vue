@@ -5,7 +5,7 @@
       <v-main>
         <PackageList/>
       </v-main>
-
+      <AlertComponent></AlertComponent>
     </v-container>
 
 
@@ -17,12 +17,13 @@
 
 <script>
 import PackageList from './components/PackageList';
+import AlertComponent from './components/AlertComponent';
 
 export default {
   name: 'App',
 
   components: {
-    PackageList,
+    PackageList, AlertComponent
   },
 
 
