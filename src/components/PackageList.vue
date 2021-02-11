@@ -15,7 +15,7 @@
         :server-items-length="totalPackages"
         :loading="loading"
         @click:row="getInfo"
-        class="elevation-1"
+        class="elevation-1 row-pointer"
     ></v-data-table>
   <PackageCard v-model="modalIsVisible" :current="currentPackage"/>
   </div>
@@ -100,6 +100,8 @@ name: "PackageList",
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .row-pointer >>> tbody tr :hover{
+    cursor: pointer;
+  }
 </style>
