@@ -3,8 +3,7 @@
     <div  :class="{ 'collapsed-container': !isExpanded}">
       <slot></slot>
     </div>
-    <v-btn class="toggle-button button-align" small @click="isExpanded = !isExpanded">Show
-      {{ isExpanded ? 'less' : 'more' }}</v-btn>
+    <v-btn class="toggle-button button-align" small @click="inverse">Show {{ isExpanded ? 'less' : 'more' }}</v-btn>
   </div>
 
 </template>
@@ -18,6 +17,11 @@ name: "PartialCollapseBlock",
   data(){
     return {
 
+    }
+  },
+  methods:{
+    inverse: function (){
+      this.isExpanded = !this.isExpanded
     }
   },
   computed: {
