@@ -100,7 +100,7 @@ name: "PackageList",
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
   .row-pointer >>> tbody tr :hover{
     cursor: pointer;
   }
